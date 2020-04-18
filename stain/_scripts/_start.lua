@@ -1,0 +1,2 @@
+
+world:loadSTAIN("bedroom")
