@@ -11,10 +11,12 @@ function Useable:start()
 end
 
 function Useable:makeTip(t)
-	self.entTip = Tip(t)
+	t.name = "tip"
+	self.entTip = entityCreate("tips", t)
 	if not t.x then
 		self.entTip.x = self.rect.w/2 - 4
 	end
+	self.entTip.parent = self
 	self.entTip:start()
 end
 
@@ -40,11 +42,6 @@ function Useable:update()
 	if input.use.pressed and self.hasPlayer then
 		self:use()
 	end
-end
-
-function Useable:draw()
-	Entity.draw(self)
-	if self.entTip then self.entTip:draw(self.x, self.y) end
 end
 
 function Useable:gotPlayer()

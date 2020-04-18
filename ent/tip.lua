@@ -49,8 +49,8 @@ function Tip:deactivate()
 end
 
 function Tip:draw(dx, dy)
-	dx = (dx or 0) + self.x
-	dy = (dy or 0) + self.y - 5
+	dx = (dx or 0) + self.x + self.parent.x
+	dy = (dy or 0) + self.y - 5 + self.parent.y
 	lg.setColor(1,1,1, self.opacity)
 	lg.draw(self.img, dx, dy, 0, 1,1, self.ox, self.oy)
 	lg.setColor(1,1,1)
