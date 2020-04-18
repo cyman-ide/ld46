@@ -23,10 +23,18 @@ function Boi:start()
 	self:switchSprite("idle")
 	self.ox = 5
 
+	self.camZoom = 1
+
 	self.canJump = false
 end
 
 function Boi:update()
+	if self.seized then
+		self.xv = 0
+		self.yv = 0
+		return
+	end
+
 	if input.quit.down then
 		love.event.quit()
 	end
@@ -66,7 +74,7 @@ end
 
 function Boi:postUpdate()
 	local ww, wh = love.graphics.getDimensions()
-	camera.zoom = wh / 140
+	camera.zoom = wh / 140 * self.camZoom
 	camera.y = 70
 	camera.x = 124
 	love.window.setTitle(love.timer.getFPS())

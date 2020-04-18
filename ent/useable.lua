@@ -12,6 +12,9 @@ end
 
 function Useable:makeTip(t)
 	self.entTip = Tip(t)
+	if not t.x then
+		self.entTip.x = self.rect.w/2 - 4
+	end
 	self.entTip:start()
 end
 
