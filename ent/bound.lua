@@ -7,7 +7,7 @@ function Bound:start()
 		self.layer.binding = true
 	end
 	self.binding = true
-	self.rect = Rect(0,0, 20,20, self)
+	self.rect = Rect(0,0, (self.w or 20), (self.h or 20), self)
 end
 
 function Bound:draw()
