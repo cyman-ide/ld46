@@ -7,13 +7,13 @@ local GRAV = 240
 local JUMP_HEIGHT = 20
 local JUMP_VEL = math.sqrt(GRAV * JUMP_HEIGHT * 2)
 
-local IMG = ImageArray("img/boi/boi_run.png", 11,19, 0)
+local IMG = ImageArray("img/boi/boi_run.png", 11,21, 0)
 local STEP = 0.1
 
 local abs = math.abs
 
 function Boi:start()
-	self.rect = Rect(-5,0, 11,19, self)
+	self.rect = Rect(-5,0, 11,21, self)
 	self.bound = true
 	self.ya = GRAV
 
