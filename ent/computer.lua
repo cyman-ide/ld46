@@ -30,6 +30,7 @@ function Computer:use()
 			when(1)
 			world:loadSTAIN("discord")
 		end)
+		chair:switchLayer("player")
 	end
 end
 
