@@ -3,14 +3,25 @@ local Boi = Entity:extend()
 Boi.name = "boi"
 
 local SPEED = 50
-local GRAV = 600
-local JUMP_HEIGHT = 40
+local GRAV = 240
+local JUMP_HEIGHT = 20
 local JUMP_VEL = math.sqrt(GRAV * JUMP_HEIGHT * 2)
+
+local IMG = ImageArray("img/boi/boi_run.png", 11,19, 0)
+local STEP = 0.1
+
+local abs = math.abs
 
 function Boi:start()
 	self.rect = Rect(-5,0, 11,19, self)
 	self.bound = true
 	self.ya = GRAV
+
+	self:addSprite(Sprite(IMG,'3'), "idle")
+	self:addSprite(Sprite(IMG,'1-e',STEP), "run")
+	self:addSprite(Sprite(IMG,'1'), "fall")
+	self:switchSprite("idle")
+	self.ox = 5
 
 	self.canJump = false
 end
@@ -22,10 +33,22 @@ function Boi:update()
 
 	if input.left.down then
 		self.xv = -SPEED
+		self.scalex = -1
 	elseif input.right.down then
 		self.xv = SPEED
+		self.scalex = 1
 	else
 		self.xv = 0
+	end
+
+	if not self.canJump then
+		self:switchSprite("fall")
+	else
+		if abs(self.xv) > 1 then
+			self:switchSprite("run")
+		else
+			self:switchSprite("idle")
+		end
 	end
 
 	if input.jump.pressed and self.canJump then
@@ -43,13 +66,10 @@ end
 
 function Boi:postUpdate()
 	local ww, wh = love.graphics.getDimensions()
-	camera.zoom = ww / 140
+	camera.zoom = wh / 140
 	camera.y = 70
-	camera.x = self.x
-end
-
-function Boi:draw()
-	love.graphics.rectangle("fill", self.rect:get())
+	camera.x = 124
+	love.window.setTitle(love.timer.getFPS())
 end
 
 return Boi
