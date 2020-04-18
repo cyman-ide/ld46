@@ -14,7 +14,7 @@ local topText = lines[love.math.random(i)]
 local bottomText = lines[love.math.random(i)]
 
 local numImages = 0
-while love.filesystem.getInfo( (numImages+1)..".png" ) do
+while love.filesystem.getInfo( path .. (numImages+1)..".png" ) do
 	numImages = numImages + 1
 end
 local image = lg.newImage(path .. love.math.random(numImages) .. ".png")

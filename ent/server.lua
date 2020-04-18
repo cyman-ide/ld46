@@ -80,7 +80,9 @@ function Server:postUpdate() -- coppied from boi
 end
 
 function Server:draw()
+	local z = camera.zoom
 	lg.push()
+	lg.setScissor(self.x*z, self.y*z, self.rect.w*z, self.rect.h*z)
 	lg.translate(self.x, self.y + 5)
 	lg.scale(0.5)
 	local dx = 10
@@ -88,16 +90,18 @@ function Server:draw()
 	for i=#self.msg, 1, -1 do
 		local msg = self.msg[i]
 		if msg[1] == 0 then
-			lg.draw(pfpBoi, dx, dy-60)
-			font:print("hey guys check out my meme :)", dx+15, dy-57)
-			dy = dy - 90
+			lg.draw(pfpBoi, dx, dy-90)
+			font:print("hey guys check out my meme :)", dx+15, dy-87)
+			lg.draw(gMeme, dx, dy-60, 0, 0.2)
+			dy = dy - 120
 		else
 			lg.draw(pfp[msg[1]], dx, dy)
 			font:print(user[msg[2]][msg[3]], dx+15, dy+3)
 			dy = dy - 30
 		end
-		if dy < self.y-30 then break end
+		if dy < self.y-60 then break end
 	end
+	lg.setScissor()
 	lg.pop()
 end
 
