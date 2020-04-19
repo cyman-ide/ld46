@@ -38,7 +38,7 @@ local function initPosters(time)
 		end
 		used[poster.user] = true
 		poster.nextIndex = 1
-		poster.nextTime = time + love.math.random() * 5 + 1
+		poster.nextTime = time + love.math.random() * 2
 		posters[i] = poster
 	end
 end
@@ -64,6 +64,11 @@ function Server:update()
 
 	if input.use.pressed then
 		table.insert(self.msg, {0})
+		gHour = 1
+		CutScript(function (when)
+			when(5)
+			world:loadSTAIN("bedroom")
+		end)
 	end
 
 	if #self.msg > 200 then
