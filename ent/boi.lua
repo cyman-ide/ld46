@@ -43,6 +43,11 @@ function Boi:start()
 
 	self.canJump = false
 
+	if gHour == 1 then
+		SPEED = SPEED * 2
+		STEP = STEP / 2
+	end
+
 	if gHour == 1 and world.name == "bedroom" then
 		self.x = self.x - 100
 		self.camZoom = 4
@@ -56,18 +61,18 @@ function Boi:start()
 			self.yv = -JUMP_VEL/2
 
 			when(1.5)
-			self.xv = SPEED*2
+			self.xv = 200
 			self.scalex = 1
 			self:switchSprite("run")
 			world:getLayer("obj"):withName("office_chair")[1]:switchSprite("spin")
 
-			when(2)
+			when(1.75)
 			self:switchSprite("dive")
 			self.yv = -JUMP_VEL
 			self.bound = false
 			self.canJump = false -- stop step sounds
 
-			when(2.5)
+			when(2)
 			world:getLayer("obj"):withName("window")[1].visible = true
 			self.sndCrash:play()
 			entityCreate("tips", {
@@ -83,11 +88,14 @@ function Boi:start()
 		gHour = 2
 		self.x = -50
 		self.y = -150
-		self.xv = SPEED * 2
+		self.xv = SPEED/2
 		self.seized = true
 		self:switchSprite("dive")
 		CutScript(function(when, self)
-			when(1.4)
+			when(1.5)
+			flux.to(self, 1.5, {xv=0})
+
+			when(3)
 			self.seized = false
 		end, self)
 	elseif gStartFrom then

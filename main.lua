@@ -39,10 +39,14 @@ function cum.onWorldLoad()
 		musNew = musComputer
 	end
 
-	if musNew ~= musLast then
+	if musNew then
+		if musNew ~= musLast then
+			musLast:stop()
+			musNew:play()
+			musLast = musNew
+		end
+	else
 		musLast:stop()
-		musNew:play()
-		musLast = musNew
 	end
 end
 

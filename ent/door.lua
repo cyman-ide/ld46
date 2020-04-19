@@ -15,6 +15,7 @@ function D:start()
 		self.gotPlayer = function(self, boi)
 			boi.seized = true
 			boi.yv = -50
+			boi.xv = 50
 			boi:switchSprite("fall")
 			
 			CutScript(function(when, self)
