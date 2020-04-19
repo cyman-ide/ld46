@@ -37,6 +37,8 @@ function Boi:start()
 	self:switchSprite("idle")
 	self.ox = 5
 
+	self.stepDistance = 30
+
 	self.camZoom = 1
 
 	self.canJump = false
@@ -46,6 +48,7 @@ function Boi:start()
 		self.camZoom = 4
 		self.camFocus = true
 		self.seized = true
+		self.sndCrash = love.audio.newSource("sfx/shatter2.ogg", "static")
 		CutScript(function (when, self)
 			when(1)
 			self.camZoom = 1
@@ -62,9 +65,11 @@ function Boi:start()
 			self:switchSprite("dive")
 			self.yv = -JUMP_VEL
 			self.bound = false
+			self.canJump = false -- stop step sounds
 
 			when(2.5)
 			world:getLayer("obj"):withName("window")[1].visible = true
+			self.sndCrash:play()
 			entityCreate("tips", {
 				name = "shake",
 				duration = 0.5,
@@ -159,6 +164,14 @@ function Boi:postUpdate()
 		camera.x = 124
 	end
 	love.window.setTitle(love.timer.getFPS())
+
+	if self.canJump then
+		self.stepDistance = self.stepDistance - abs(self.xv) * dt
+		if self.stepDistance < 0 then
+			gSndSteps[love.math.random(5)]:play()
+			self.stepDistance = 24
+		end
+	end
 end
 
 return Boi
