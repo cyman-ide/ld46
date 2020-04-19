@@ -13,6 +13,18 @@ local STEP = 0.1
 
 local abs = math.abs
 
+local SCREEN_W = 248
+
+local roomLeft = {
+	out2 = "out1",
+	out3 = "out2",
+}
+
+local roomRight = {
+	out1 = "out2",
+	out2 = "out3",
+}
+
 function Boi:start()
 	self.rect = Rect(-5,0, 11,21, self)
 	self.bound = true
@@ -58,13 +70,23 @@ function Boi:start()
 			world:loadSTAIN("out1")
 		end, self)
 	elseif gHour == 1 and world.name == "out1" then
+		gHour = 2
+		self.x = -50
+		self.y = -150
 		self.xv = SPEED * 2
 		self.seized = true
 		self:switchSprite("dive")
 		CutScript(function(when, self)
-			when(1.5)
+			when(1.4)
 			self.seized = false
 		end, self)
+	elseif gStartFrom then
+		if gStartFrom == "left" then
+			self.x = 13
+		elseif gStartFrom == "right" then
+			self.x = SCREEN_W - 13
+		end
+		gStartFrom = false
 	end
 end
 
@@ -96,6 +118,20 @@ function Boi:update()
 
 	if input.jump.pressed and self.canJump then
 		self.yv = -JUMP_VEL
+	end
+
+	if self.x > SCREEN_W then
+		local rmr = roomRight[world.name]
+		if rmr then
+			world:loadSTAIN(rmr)
+			gStartFrom = "left"
+		end
+	elseif self.x < 0 then
+		local rml = roomLeft[world.name]
+		if rml then
+			world:loadSTAIN(rml)
+			gStartFrom = "right"
+		end
 	end
 
 	self.canJump = false
