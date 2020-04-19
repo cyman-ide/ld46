@@ -62,7 +62,7 @@ function Server:update()
 		end
 	end
 
-	if input.use.pressed then
+	if input.use.pressed and gHour == 0 then
 		table.insert(self.msg, {0})
 		gHour = 1
 		CutScript(function (when)

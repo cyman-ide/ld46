@@ -14,5 +14,15 @@ function cum.preStart()
 	layer.stainless = true
 end
 
+local musHouse = love.audio.newSource("mus/jig2.xm", "stream")
+
+function cum.onWorldLoad()
+	if world.name == "bedroom" or world.name == "modhouse" then
+		musHouse:play()
+	else
+		musHouse:stop()
+	end
+end
+
 cum.init()
 

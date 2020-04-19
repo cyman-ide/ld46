@@ -65,6 +65,11 @@ function Boi:start()
 
 			when(2.5)
 			world:getLayer("obj"):withName("window")[1].visible = true
+			entityCreate("tips", {
+				name = "shake",
+				duration = 0.5,
+				intesity = 5,
+			})
 
 			when(3)
 			world:loadSTAIN("out1")
