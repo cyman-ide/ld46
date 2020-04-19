@@ -29,7 +29,7 @@ function Boi:start()
 
 	self.canJump = false
 
-	if gHour == 1 then
+	if gHour == 1 and world.name == "bedroom" then
 		self.x = self.x - 100
 		self.camZoom = 4
 		self.camFocus = true
@@ -56,6 +56,14 @@ function Boi:start()
 
 			when(3)
 			world:loadSTAIN("out1")
+		end, self)
+	elseif gHour == 1 and world.name == "out1" then
+		self.xv = SPEED * 2
+		self.seized = true
+		self:switchSprite("dive")
+		CutScript(function(when, self)
+			when(1.5)
+			self.seized = false
 		end, self)
 	end
 end
