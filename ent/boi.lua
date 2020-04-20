@@ -102,6 +102,8 @@ function Boi:start()
 	elseif gFromWorld == "modcom" then
 		self.x = 165
 		gFromWorld = "modhouse"
+	elseif world.name == "bedroom" and gHour > 0 then
+		self.x = 67
 	elseif gStartFrom then
 		if gStartFrom == "left" then
 			self.x = 13
@@ -129,7 +131,11 @@ function Boi:update()
 	end
 
 	if not self.canJump then
-		self:switchSprite("fall")
+		if SPEED == 50 then
+			self:switchSprite("fall")
+		else
+			self:switchSprite("dive")
+		end
 	else
 		if abs(self.xv) > 1 then
 			self:switchSprite("run")
