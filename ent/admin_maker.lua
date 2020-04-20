@@ -31,8 +31,9 @@ function Mkr:start()
 				self.state = 3
 
 				when(2)
-				gHour = 4
+				gHour = gHour < 4 and 4 or gHour
 				gFromWorld = "modcom"
+				love.mouse.setVisible(true)
 				world:loadSTAIN("modhouse")
 			end)
 		end,

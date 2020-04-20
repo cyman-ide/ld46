@@ -9,7 +9,7 @@ function Computer:start()
 	self:addSprite(Sprite(IMG,'1'))
 	self:addSprite(Sprite(IMG,'2'))
 	self:switchSprite(1)
-	self.rect = Rect(0,0, IMG.w, IMG.h, self)
+	self.rect = Rect(10,0, IMG.w, IMG.h, self)
 	self:makeTip { text = "go online" }
 	self.online = false
 end
