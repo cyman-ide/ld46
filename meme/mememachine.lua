@@ -4,6 +4,9 @@ local path = args[1] or "meme/"
 
 local lg = love.graphics
 
+lg.push()
+lg.origin()
+
 local lines = {}
 local i = 0
 for line in love.filesystem.lines(path .. "text.txt") do
@@ -43,6 +46,7 @@ lg.draw(fontCan)
 
 lg.setCanvas()
 lg.setFont(pastFont)
+lg.pop()
 
 print("meme generated")
 

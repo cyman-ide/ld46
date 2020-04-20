@@ -12,7 +12,7 @@ end
 function T:update()
 	if input.use.pressed then
 		lg.setFont(self.lastFont)
-		world:loadSTAIN("bedroom")
+		world:loadSTAIN("meme")
 	end
 end
 
