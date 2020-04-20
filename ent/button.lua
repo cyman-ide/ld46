@@ -35,7 +35,7 @@ function Button:editorSetValue(key, val)
 		self:addSprite(Sprite(self.img,'1'), "out")
 		self:addSprite(Sprite(self.img,'2'), "in")
 		self:switchSprite("out")
-		self.rect = Rect(0,0, self.img.w, self.img.h, self)
+		self.rect = Rect(0,0, self.img.w*self.scalex, self.img.h*self.scaley, self)
 	end
 end
 
