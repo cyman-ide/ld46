@@ -1,0 +1,5 @@
+exit vim
+:q
+press x
+alt+f4
+ctrl+k

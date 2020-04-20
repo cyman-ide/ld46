@@ -6,6 +6,7 @@ cum.input.register {
 	right = {"key.right", "key.d"},
 	jump = {"key.space", "key.x", "key.j"},
 	use = {"key.c", "key.k"},
+	click = "mouse.1",
 	quit = "key.escape",
 }
 

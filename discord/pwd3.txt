@@ -1,0 +1,5 @@
+what isn't green?
+table that^isn't green
+a green^bucket
+a green^pail
+a green^ball

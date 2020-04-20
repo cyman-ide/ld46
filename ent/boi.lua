@@ -59,6 +59,7 @@ function Boi:start()
 			self.camZoom = 1
 			self.camFocus = false
 			self.yv = -JUMP_VEL/2
+			self.stepDistance = 20
 
 			when(1.5)
 			self.xv = 200
@@ -98,6 +99,9 @@ function Boi:start()
 			when(3)
 			self.seized = false
 		end, self)
+	elseif gFromWorld == "modcom" then
+		self.x = 165
+		gFromWorld = "modhouse"
 	elseif gStartFrom then
 		if gStartFrom == "left" then
 			self.x = 13

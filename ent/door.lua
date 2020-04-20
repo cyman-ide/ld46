@@ -33,14 +33,15 @@ function D:start()
 				world:loadSTAIN("modhouse")
 			end, self)
 		end
-	elseif gHour == 3 then
-		self:switchSprite(2)
+	elseif gHour >= 3 then
 		if world.name == "modhouse" then
+			self:switchSprite(2)
 			self:makeTip { text = "go outside" }
 			self.use = function(self)
 				world:loadSTAIN("out3")
 			end
 		elseif world.name == "out3" then
+			self:switchSprite(2)
 			self:makeTip { text = "go inside" }
 			self.use = function(self)
 				world:loadSTAIN("modhouse")
