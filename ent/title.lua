@@ -6,7 +6,7 @@ local lg = love.graphics
 
 function T:start()
 	self.lastFont = lg.getFont()
-	lg.setFont(lg.newFont("meme/impact.ttf", 32))
+	self.font = lg.newFont("meme/impact.ttf", 32)
 end
 
 function T:update()
@@ -24,10 +24,12 @@ function T:postUpdate()
 end
 
 function T:draw()
+	lg.setFont(self.font)
 	lg.printf("Jiggy Bungus", 0,0, 248, "center")
 
 	font:print("created by\ncyman and yecats", 50,40)
 	font:print("press k or c to start", 80, 80)
+	lg.setFont(self.lastFont)
 end
 
 return T

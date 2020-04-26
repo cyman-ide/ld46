@@ -1,6 +1,8 @@
 
 require "cum"
 
+cum.release = true
+
 cum.input.register {
 	left = {"key.left", "key.a"},
 	right = {"key.right", "key.d"},
@@ -22,12 +24,16 @@ gSndSteps = {
 	love.audio.newSource("sfx/step4.wav", "static"),
 	love.audio.newSource("sfx/step5.wav", "static"),
 }
+for _,snd in ipairs(gSndSteps) do
+	snd:setVolume(0.5)
+end
 
 local musHouse = love.audio.newSource("mus/jig2.xm", "stream")
 local musOutside = love.audio.newSource("mus/outside.ogg", "stream")
 musOutside:setLooping(true)
 local musComputer = love.audio.newSource("mus/computer.ogg", "stream")
 musComputer:setLooping(true)
+local musTitle = love.audio.newSource("mus/jig3e.xm", "stream")
 
 local musLast = musOutside
 function cum.onWorldLoad()
@@ -38,6 +44,8 @@ function cum.onWorldLoad()
 		musNew = musOutside
 	elseif world.name == "discord" or world.name == "modcom" then
 		musNew = musComputer
+	elseif world.name == "_start" or world.name == "meme" then
+		musNew = musTitle
 	end
 
 	if musNew then

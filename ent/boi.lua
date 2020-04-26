@@ -181,7 +181,6 @@ function Boi:postUpdate()
 		camera.y = 70
 		camera.x = 124
 	end
-	love.window.setTitle(love.timer.getFPS())
 
 	if self.canJump then
 		self.stepDistance = self.stepDistance - abs(self.xv) * dt

@@ -76,6 +76,7 @@ function Server:start()
 				ent.update = function() end
 			elseif gHour == 5 then
 				ent.onClick = function ()
+					if gHour == 6 then return end
 					table.insert(self.msg, {-1, 0, 2})
 					gHour = 6
 					CutScript(function(when)
@@ -144,18 +145,11 @@ function Server:update()
 	end
 end
 
-function Server:postUpdate() -- coppied from boi
-	local ww, wh = love.graphics.getDimensions()
-	camera.zoom = wh / 140
-	camera.y = 70
-	camera.x = 124
-	love.window.setTitle(love.timer.getFPS())
-end
-
 function Server:draw()
-	local z = camera.zoom
 	lg.push()
-	lg.setScissor(self.x*z, self.y*z, self.rect.w*z, self.rect.h*z)
+	local z = camera.zoom
+	local sx, sy = camera:worldToScreen(self.x, self.y)
+	lg.setScissor(sx, sy, self.rect.w*z, self.rect.h*z)
 	lg.translate(self.x, self.y + 5)
 	lg.scale(0.5)
 	local dx = 10
